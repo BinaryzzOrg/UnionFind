@@ -67,7 +67,7 @@ public class UnionFind {
 	}//end method
 
 	/*
-	 * find returns true if both the given nodes are in the same list of connected nodes
+	 * find returns true if both the given nodes have the same root
 	 */
 	public boolean find(int A, int B) {
 		return rootContains(new Node(A)) && rootContains(new Node(B));
@@ -87,7 +87,7 @@ public class UnionFind {
 
 	/*
 	 * rootContains is for checking the main structure of the connected nodes to check
-  	 * if a specified node already exist
+  	 * if a specified node already exist that is connected to the root
 	 */
 	private boolean rootContains(Node node) {
 		Node temp = root;
