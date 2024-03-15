@@ -195,7 +195,7 @@ public class Main {
 					"┇ Notice: \033[3mPlease input another number.\033[0m\n" +
 					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 			// @formatter:on
-			checkElement();
+			return checkElement();
 		} // end if
 
 		return set;
