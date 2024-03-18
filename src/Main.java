@@ -11,7 +11,7 @@ public class Main {
 	// === MAIN METHOD === //
 	public static void main(String[] args) {
 		System.out.print(":: What is the size of the set?\nUserInput%> ");
-		int inputSize = checkUserInputMenu("What is the size of the set?\nUserInput%> ");
+		int inputSize = checkUserInput_Menu("What is the size of the set?\nUserInput%> ");
 		universal = new Node[inputSize];
 
 		// UniversalSize setter
@@ -129,7 +129,7 @@ public class Main {
 	 * scenarios of printing.
 	 */
 	// TLDR - METHOD FOR DEALING WITH NEGATIVE INTEGERS
-	public static int checkUserInputMenu(String prompt) {
+	public static int checkUserInput_Menu(String prompt) {
 		sc = new Scanner(System.in);
 		if (sc.hasNextInt()) {
 			int value = sc.nextInt();
@@ -143,23 +143,24 @@ public class Main {
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 				// @formatter:on
 				System.out.print(prompt);
-				return checkUserInputMenu(prompt);
-			}
+				return checkUserInput_Menu(prompt);
+			} // end if
 			return value;
 		} // end if
 		System.out.println(printCustomError("integer"));
 		System.out.print(prompt);
-		return checkUserInput(prompt);
+		return checkUserInput_Menu(prompt);
 	}// end if
 
 	/*
 	 * The checkElement method scans the user's input and checks if that exists in
-	 * the universal set. If it does, then the method returns the set(userInput), if
-	 * it doesn't then the method prints out an error that tells the user their
-	 * input doesn't currently exist in the universal set. For the parameter, String
-	 * prompt is used to pass the method a prompt that the user might see. And the
-	 * boolean SetNumMenu is used distinguish if the checkElement method is being
-	 * used by the universalSize setter in the main method.
+	 * the universal set. If it does, then the method returns the set(the
+	 * userInput), if it doesn't then the method prints out an error that tells the
+	 * user their input doesn't currently exist in the universal set. For the
+	 * parameters, String prompt is used to pass the method a prompt that the user
+	 * might see. And the boolean SetNumMenu is used to distinguish if the
+	 * checkElement method is being used by the universalSize setter in the main
+	 * method.
 	 */
 	public static int checkElement(String prompt, boolean SetNumMenu) {
 		System.out.print(prompt);
