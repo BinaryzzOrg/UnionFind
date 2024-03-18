@@ -6,20 +6,19 @@ public class Main {
 	private static UnionFind uf;
 	static Scanner sc;
 	static Node[] universal;
+	static int counter = 0;
 
 	// === MAIN METHOD === //
 	public static void main(String[] args) {
-
 		System.out.print(":: What is the size of the set?\nUserInput%> ");
 		int inputSize = checkUserInputMenu("What is the size of the set?\nUserInput%> ");
 		universal = new Node[inputSize];
 
 		System.out.print("\nEnter " + inputSize + " numbers to be added to the set.");
-		for (int i = 0; i < inputSize; i++) {
-			System.out.print("\nUserInput%> ");
-			universal[i] = new Node(checkUserInput("\nUserInput%> "));
-
+		for (; counter < inputSize;) {
+			universal[counter] = new Node(checkElement("\nUserInput%> ", true));
 		} // end for
+
 		uf = new UnionFind(universal.length, universal);
 		printUniversalSet();
 
@@ -55,35 +54,31 @@ public class Main {
 	 */
 	public static void Menu() {
 		System.out.print(printMenuChoices());
+		String prompt = "\n:: Select one element from set.\nUserInput%> ";
+		boolean SetNumMenu = false;
 
 		switch (checkUserInput(printMenuChoices())) {
 		case 1: {// Union
-			int A = checkElement();
-			int B = checkElement();
-
+			int A = checkElement(prompt, SetNumMenu);
+			int B = checkElement(prompt, SetNumMenu);
 			uf.union(A, B);
-			System.out.println("\n" + A + " and " + B + " are now connected!");
 			break;
 		}
-
 		case 2: {// Find
-			int A = checkElement();
-			int B = checkElement();
-
+			int A = checkElement(prompt, SetNumMenu);
+			int B = checkElement(prompt, SetNumMenu);
 			//@formatter:off
 			System.out.println((uf.find(A, B)) ? 
-					  "\n" + A + " and " + B + " belong to the same subset"
-					: "\n" + A + " and " + B + " don't belong to the same subset");
+					  "\n:: " + A + " and " + B + " belong to the same subset"
+					: "\n:: " + A + " and " + B + " don't belong to the same subset");
 			//@formatter:on
 			break;
 		}
-
 		case 3: {// Delete
 			System.out.println(":: Exiting now...");
 			System.exit(0);
 			break;
 		}
-
 		default:
 			// @formatter:off
 			System.out.println("\n" 
@@ -97,7 +92,6 @@ public class Main {
 			// @formatter:on
 			break;
 		}// end method
-
 		Menu();
 	}// end method
 
@@ -113,15 +107,11 @@ public class Main {
 	// TLDR - METHOD FOR DEALING WITH INTEGER INPUT
 	public static int checkUserInput(String prompt) {
 		sc = new Scanner(System.in);
-
 		if (sc.hasNextInt()) {
 			int value = sc.nextInt();
-
 			return value;
 		} // end if
-
 		System.out.println(printCustomError("integer"));
-
 		System.out.print(prompt);
 		return checkUserInput(prompt);
 	}// end if
@@ -138,10 +128,8 @@ public class Main {
 	// TLDR - METHOD FOR DEALING WITH NEGATIVE INTEGERS
 	public static int checkUserInputMenu(String prompt) {
 		sc = new Scanner(System.in);
-
 		if (sc.hasNextInt()) {
 			int value = sc.nextInt();
-
 			if (value < 1) {
 				// @formatter:off
 				System.out.println("\n" +
@@ -156,37 +144,48 @@ public class Main {
 			}
 			return value;
 		} // end if
-
 		System.out.println(printCustomError("integer"));
-
 		System.out.print(prompt);
 		return checkUserInput(prompt);
 	}// end if
 
-	public static String printCustomError(String type) {
-		// @formatter:off
-			return "\n" +
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
-						"┇ Warning: Input is not a "+ type +" value. \n" +
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
-						"┇ Notice: \033[3mPlease only enter a "+ type +" value.\033[0m\n" +
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n";
-		// @formatter:on
-	}// end method
-
-	public static int checkElement() {
-		System.out.print("\n:: Select one element from set.\nUserInput%> ");
-		int set = checkUserInput("\n:: Select one element from set.\nUserInput%> ");
+	/*
+	 * The checkElement method scans the user's input and checks if that exists in
+	 * the universal set. If it does, then the method returns the set(userInput), if
+	 * it doesn't then the method prints out an error that tells the user their
+	 * input doesn't currently exist in the universal set. For the parameter, String
+	 * prompt is used to pass the method a prompt that the user might see. And the
+	 * boolean SetNumMenu is used distinguish if the checkElement method is being
+	 * used by the universalSize setter in the main method.
+	 */
+	public static int checkElement(String prompt, boolean SetNumMenu) {
+		System.out.print(prompt);
+		int set = checkUserInput(prompt);
 		boolean setExist = false;
+
 		for (Node node : universal) {
-			if (node.getData() == set) {
-				setExist = true;
-				break;
-			}
+			if (node != null) {
+				if (node.getData() == set) {
+					setExist = true;
+					break;
+				}
+			} // end if
 		} // end for
 
-		if (setExist == false) {
+		if (SetNumMenu && setExist == true) {
+			// @formatter:off
+			System.out.print("\n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+					"┇ Warning: "+ set +" already exist in the universal set. \n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+					"┇ Notice: \033[3mPlease input another number.\033[0m\n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
+			// @formatter:on
+		} else {
+			counter++;
+		}
 
+		if (setExist == false && SetNumMenu == false) {
 			// @formatter:off
 			System.out.print("\n" +
 					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
@@ -195,9 +194,9 @@ public class Main {
 					"┇ Notice: \033[3mPlease input another number.\033[0m\n" +
 					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 			// @formatter:on
-			return checkElement();
-		} // end if
 
+			return checkElement(prompt, SetNumMenu);
+		} // end if
 		return set;
 	}// end class
 
@@ -209,4 +208,14 @@ public class Main {
 		System.out.print("}\n");
 	}// end method
 
+	public static String printCustomError(String type) {
+		// @formatter:off
+			return "\n" +
+						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+						"┇ Warning: Input is not a "+ type +" value. \n" +
+						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+						"┇ Notice: \033[3mPlease only enter a "+ type +" value.\033[0m\n" +
+						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n";
+		// @formatter:on
+	}// end method
 }// end class
