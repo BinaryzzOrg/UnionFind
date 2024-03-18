@@ -14,6 +14,7 @@ public class Main {
 		int inputSize = checkUserInputMenu("What is the size of the set?\nUserInput%> ");
 		universal = new Node[inputSize];
 
+		// UniversalSize setter
 		System.out.print("\nEnter " + inputSize + " numbers to be added to the set.");
 		for (; counter < inputSize;) {
 			universal[counter] = new Node(checkElement("\nUserInput%> ", true));
@@ -46,11 +47,10 @@ public class Main {
 	}// end method
 
 	/*
-	 * The MenuChoices method contains the following operations: Search, Insert,
-	 * Delete, Display, and Exit. This method calls the PrintMenuChoices that prints
-	 * out the choices for modifying the HashTable that is chosen by the user.
-	 * MenuChoices method also handles miss inputs of the user and loops if it
-	 * detects one.
+	 * The MenuChoices method contains the following operations: Union, Find,and
+	 * Exit. This method calls the PrintMenuChoices that prints out the choices for
+	 * modifying the HashTable that is chosen by the user. MenuChoices method also
+	 * handles miss inputs of the user and loops if it detects one.
 	 */
 	public static void Menu() {
 		System.out.print(printMenuChoices());
@@ -68,9 +68,14 @@ public class Main {
 			int A = checkElement(prompt, SetNumMenu);
 			int B = checkElement(prompt, SetNumMenu);
 			//@formatter:off
-			System.out.println((uf.find(A, B)) ? 
-					  "\n:: " + A + " and " + B + " belong to the same subset"
-					: "\n:: " + A + " and " + B + " don't belong to the same subset");
+			System.out.println((uf.find(A, B)) ? "\n"+
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+					"┇ \033[3m" + A + " and " + B + " belong to the same subset\033[0m\n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n"
+					:"\n"+
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+					"┇ \033[3m" + A + " and " + B + " DON'T belong to the same subset\033[0m\n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 			//@formatter:on
 			break;
 		}
@@ -100,9 +105,7 @@ public class Main {
 	 * integer. If the input is an integer, it is stored in the 'value' variable and
 	 * returns it. If the input is not an integer, an error message is displayed,
 	 * and the user is prompted to enter an integer value. The 'prompt' parameter is
-	 * used for different scenarios of printing, and the 'isNotAllowed' parameter is
-	 * for the setSize method. If 'isNotAllowed' is passed a 'true', then the
-	 * checkUserMenu method would not accept any value that is less than 15.
+	 * used for different scenarios of printing.
 	 */
 	// TLDR - METHOD FOR DEALING WITH INTEGER INPUT
 	public static int checkUserInput(String prompt) {
@@ -120,10 +123,10 @@ public class Main {
 	 * The CheckUserInputMenu method scans the user's input and checks if it is an
 	 * integer. If the input is an integer, it is stored in the 'value' variable and
 	 * returns it. If the input is not an integer, an error message is displayed,
-	 * and the user is prompted to enter an integer value. The 'prompt' parameter is
-	 * used for different scenarios of printing, and the 'isNotAllowed' parameter is
-	 * for the setSize method. If 'isNotAllowed' is passed a 'true', then the
-	 * checkUserMenu method would not accept any value that is less than 15.
+	 * and the user is prompted to enter an integer value and if the user enters a
+	 * negative input the method would print an error showing that it currently does
+	 * not allow negative inputs. The 'prompt' parameter is used for different
+	 * scenarios of printing.
 	 */
 	// TLDR - METHOD FOR DEALING WITH NEGATIVE INTEGERS
 	public static int checkUserInputMenu(String prompt) {
@@ -134,7 +137,7 @@ public class Main {
 				// @formatter:off
 				System.out.println("\n" +
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
-						"┇ Warning: Cannot accept integer < 1 input. \n" +
+						"┇ Warning: Cannot accept integer < 1 as input. \n" +
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
 						"┇ Notice: \033[3mPlease input another number.\033[0m\n" +
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
@@ -200,6 +203,11 @@ public class Main {
 		return set;
 	}// end class
 
+	/*
+	 * The printUniversalSet method simply prints the elements in the universal set
+	 * for the user to see what is inside the universal set. It is only called in
+	 * the beginning of the program.
+	 */
 	public static void printUniversalSet() {
 		System.out.print("\nS = { ");
 		for (Node node : universal) {
@@ -208,6 +216,12 @@ public class Main {
 		System.out.print("}\n");
 	}// end method
 
+	/*
+	 * The printCustomError is exclusively used by checkUserInput, and
+	 * checkUserInputMenu for printing their errors, but this method can by used by
+	 * other methods if needed. This method has a parameter called 'type' for
+	 * specify what data is needed be inputed on a method that calls this.
+	 */
 	public static String printCustomError(String type) {
 		// @formatter:off
 			return "\n" +
