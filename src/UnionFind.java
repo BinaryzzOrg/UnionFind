@@ -23,16 +23,15 @@ public class UnionFind {
 
 	/*
 	 * Union method is for connecting specified two nodes given by the user first
-	 * check if the root is null, therefore set the first element of the subset as
-	 * the root then if both nodes exist in the given set perform the following if
-	 * conditions if the the first given node already exist in the list of connected
-	 * nodes connect the second node at the end of the list else if condition is the
-	 * opposite of the first one where the second node already exist in the
-	 * connected nodes else the given two nodes are not in the list and just connect
-	 * them to each other as next and previous the for loop after the if condition
-	 * is for keeping track of all the subsets given to ensure that if a pair
-	 * already exist just connect that pair to the already connected nodes
-	 */
+	 * First check if both the nodes given already exist in the root, if yes print that they are already connected
+  	 * and end the method, else if they are trying to connect the node to itself end the method also.
+    	 * If no condition were satisified in the first if structure proceed to the second where if
+      	 * the first node exist in the connected nodes, add the second node to the end, else if the second node exist
+	 * add the first node in the end. Lastly, if both the provided node does not exist yet just connect them to each other.
+         * The loop after the ifs is for keeping track of the connected nodes that are not connected yet to the root but connected to each other
+	 * so when union executes it connectes both the nodes in the connected roots. Additionally, if the root is null just set the first
+  	 * subset as the root.
+  	 */
 	public void union(int A, int B) {
 		Node firstNode = new Node(A);
 		Node secondNode = new Node(B);
@@ -57,8 +56,6 @@ public class UnionFind {
 
 		if (firstNode != null && secondNode != null) {
 			Node temp = root;
-			// root contains the first node input and its connected is not equal null
-			// traverse to end
 			if (rootContains(firstNode)) {
 				while (temp.getNext() != null) {
 					temp = temp.getNext();
@@ -84,7 +81,6 @@ public class UnionFind {
 			for (int index = 0; index < subsets.length; index++) {
 				if (subsets[index] == null) {
 					subsets[index] = firstNode;
-//					System.out.println(subsets[index].getData() + " " + subsets[index].getNext().getData());
 
 					if (root == null) {
 						root = subsets[0];
