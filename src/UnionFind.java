@@ -29,7 +29,7 @@ public class UnionFind {
       	 * the first node exist in the connected nodes, add the second node to the end, else if the second node exist
 	 * add the first node in the end. Lastly, if both the provided node does not exist yet just connect them to each other.
          * The loop after the ifs is for keeping track of the connected nodes that are not connected yet to the root but connected to each other
-	 * so when union executes it connectes both the nodes in the connected roots. Additionally, if the root is null just set the first
+	 * so when union executes it connects both the nodes in the connected roots. Additionally, if the root is null just set the first
   	 * subset as the root.
   	 */
 	public void union(int A, int B) {
@@ -44,7 +44,7 @@ public class UnionFind {
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 			//@formatter:on
 			return;
-		} else if (rootContains(firstNode) == rootContains(secondNode)) {
+		} else if (firstNode.getData() == secondNode.getData()) {
 			//@formatter:off
 			System.out.println("\n"+
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
