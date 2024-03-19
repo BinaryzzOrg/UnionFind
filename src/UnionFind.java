@@ -23,15 +23,18 @@ public class UnionFind {
 
 	/*
 	 * Union method is for connecting specified two nodes given by the user first
-	 * First check if both the nodes given already exist in the root, if yes print that they are already connected
-  	 * and end the method, else if they are trying to connect the node to itself end the method also.
-    	 * If no condition were satisified in the first if structure proceed to the second where if
-      	 * the first node exist in the connected nodes, add the second node to the end, else if the second node exist
-	 * add the first node in the end. Lastly, if both the provided node does not exist yet just connect them to each other.
-         * The loop after the ifs is for keeping track of the connected nodes that are not connected yet to the root but connected to each other
-	 * so when union executes it connects both the nodes in the connected roots. Additionally, if the root is null just set the first
-  	 * subset as the root.
-  	 */
+	 * First check if both the nodes given already exist in the root, if yes print
+	 * that they are already connected and end the method, else if they are trying
+	 * to connect the node to itself end the method also. If no condition were
+	 * satisified in the first if structure proceed to the second where if the first
+	 * node exist in the connected nodes, add the second node to the end, else if
+	 * the second node exist add the first node in the end. Lastly, if both the
+	 * provided node does not exist yet just connect them to each other. The loop
+	 * after the ifs is for keeping track of the connected nodes that are not
+	 * connected yet to the root but connected to each other so when union executes
+	 * it connects both the nodes in the connected roots. Additionally, if the root
+	 * is null just set the first subset as the root.
+	 */
 	public void union(int A, int B) {
 		Node firstNode = find(new Node(A));
 		Node secondNode = find(new Node(B));
@@ -39,9 +42,9 @@ public class UnionFind {
 		if (rootContains(firstNode) && rootContains(secondNode)) {
 			//@formatter:off
 			System.out.println("\n"+
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
 						"┇\033[3m Elements " + A + " and " + B + " are ALREADY CONNECTED to each other!\033[0m\n" +
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
+						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
 			//@formatter:on
 			return;
 		} else if (firstNode.getData() == secondNode.getData()) {
@@ -99,18 +102,19 @@ public class UnionFind {
 	}// end method
 
 	/*
-	 * This overloaded find node method is for getting the element from the user given
-	 * set to keep references of connected nodes that are connected to a node in the user set
+	 * This overloaded find node method is for getting the element from the user
+	 * given set to keep references of connected nodes that are connected to a node
+	 * in the user set
 	 */
 	private Node find(Node node) {
-		for(int index = 0; index < universal.length; index++) {
-			if(node.getData() == universal[index].getData()) {
+		for (int index = 0; index < universal.length; index++) {
+			if (node.getData() == universal[index].getData()) {
 				return universal[index];
 			}
 		}
 		return null;
 	}
-	
+
 	/*
 	 * rootContains is for checking the main structure of the connected nodes to
 	 * check if a specified node already exist that is connected to the root
