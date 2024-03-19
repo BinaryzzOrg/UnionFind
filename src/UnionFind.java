@@ -33,8 +33,8 @@ public class UnionFind {
   	 * subset as the root.
   	 */
 	public void union(int A, int B) {
-		Node firstNode = new Node(A);
-		Node secondNode = new Node(B);
+		Node firstNode = find(new Node(A));
+		Node secondNode = find(new Node(B));
 
 		if (rootContains(firstNode) && rootContains(secondNode)) {
 			//@formatter:off
@@ -92,12 +92,25 @@ public class UnionFind {
 	}// end method
 
 	/*
-	 * find returns true if both the given nodes have the same root
+	 * find method returns true if both the given nodes have the same root
 	 */
 	public boolean find(int A, int B) {
 		return rootContains(new Node(A)) && rootContains(new Node(B));
 	}// end method
 
+	/*
+	 * This overloaded find node method is for getting the element from the user given
+	 * set to keep references of connected nodes that are connected to a node in the user set
+	 */
+	private Node find(Node node) {
+		for(int index = 0; index < universal.length; index++) {
+			if(node.getData() == universal[index].getData()) {
+				return universal[index];
+			}
+		}
+		return null;
+	}
+	
 	/*
 	 * rootContains is for checking the main structure of the connected nodes to
 	 * check if a specified node already exist that is connected to the root
