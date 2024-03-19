@@ -57,41 +57,77 @@ public class UnionFind {
 			return;
 		}
 
-		if (firstNode != null && secondNode != null) {
-			Node temp = root;
-			if (rootContains(firstNode)) {
-				while (temp.getNext() != null) {
-					temp = temp.getNext();
-				}
-				temp.setNext(secondNode);
-			} else if (rootContains(secondNode)) {
-				while (temp.getNext() != null) {
-					temp = temp.getNext();
-				}
-				temp.setNext(firstNode);
-			} else {
-				firstNode.setNext(secondNode);
-				secondNode.setPrev(firstNode);
+		Node temp = root;
+		if(rootContains(firstNode) && disjointContains(secondNode)) {
+			while(temp.getNext() != null) {
+				temp = temp.getNext();
 			}
+			if(secondNode.getPrev() != null) {
+				temp.setNext(secondNode.getPrev());
+			} else {
+				temp.setNext(secondNode.getNext().getPrev());
+			}
+		}
+		else if(rootContains(secondNode) && disjointContains(firstNode)) {
+			while(temp.getNext() != null) {
+				temp = temp.getNext();
+			}
+			
+			if(firstNode.getPrev() != null) {
+				temp.setNext(firstNode.getPrev());
+			} else {
+				temp.setNext(firstNode.getNext().getPrev());
+			}
+		}	
+		else if(rootContains(firstNode)) {
+			while(temp.getNext() != null) {
+				temp = temp.getNext();
+			}
+			temp.setNext(secondNode);
+		} 
+		else if(rootContains(secondNode)) {
+			while(temp.getNext() != null) {
+				temp = temp.getNext();
+			}
+			temp.setNext(firstNode);
+		}
+		else if(disjointContains(firstNode) && disjointContains(secondNode)) {
+			Node firstRoot = firstNode;
+			Node referenceToBeginning = firstRoot;
+			while(firstRoot.getNext() != null) {
+				firstRoot = firstRoot.getNext();
+			}
+			
+			if(secondNode.getPrev() != null) {
+				firstRoot.setNext(secondNode.getPrev());
+			} else {
+				firstRoot.setNext(secondNode);
+			}
+			
+			if(firstNode.getPrev() != null) {
+				root = referenceToBeginning.getPrev();
+				return;
+			}
+			root = referenceToBeginning;
+		}
+		else {
+			firstNode.setNext(secondNode);
+			secondNode.setPrev(firstNode);
+		}
 
-			//@formatter:off
+		//@formatter:off
 			System.out.println("\n"+
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
 						"┇ Elements " + A + " and " + B + " are now connected!\n" +
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
-			//@formatter:on
-
-			for (int index = 0; index < subsets.length; index++) {
-				if (subsets[index] == null) {
-					subsets[index] = firstNode;
-
-					if (root == null) {
-						root = subsets[0];
-					}
-					return;
-				}
-			} // end for
-		} // end if
+		//@formatter:on
+		
+		for(int index = 0; index < subsets.length; index++) {
+			if(subsets[index] == null) {
+				subsets[index] = firstNode;
+				return;
+			}
+		}
 	}// end method
 
 	/*
