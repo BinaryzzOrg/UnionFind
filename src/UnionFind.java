@@ -28,7 +28,7 @@ public class UnionFind {
 	 * to connect the node to itself end the method also. If no condition were
 	 * satisified in the first if structure proceed to the second where if the first
 	 * node exist in the root and the other exist in the disjoint set traverse to end
-  	 * of the root then connect it the following else if is its opposite where the
+  	 * of the root then connect it. The following else if is its opposite where the
     	 * second node exist in the root and the first node exist in the disjoint subsets
       	 * if that is the case connect the first node at the end of the root. Moreover,
 	 * the next two else if is for connecting a node that is in the root and a node
@@ -43,7 +43,7 @@ public class UnionFind {
 	public void union(int A, int B) {
 		Node firstNode = find(new Node(A));
 		Node secondNode = find(new Node(B));
-
+		Node temp = root;
 		if (rootContains(firstNode) && rootContains(secondNode)) {
 			//@formatter:off
 			System.out.println("\n"+
