@@ -92,7 +92,7 @@ public class Main {
 					+ "┇ Input is not a valid Menu choice. \n"
 					+ "⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" 
 					+ "┇ Msg: \n"
-					+ "┇ \033[3mPlease enter only 1 to 3 as input\033[0m \n"
+					+ "┇ Please enter only 1 to 3 as input \n"
 					+ "⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃");
 			// @formatter:on
 			break;
