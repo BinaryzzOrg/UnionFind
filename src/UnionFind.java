@@ -117,6 +117,12 @@ public class UnionFind {
 			firstNode.setNext(secondNode);
 			secondNode.setPrev(firstNode);
 		}
+		//@formatter:off
+		System.out.println("\n"+
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
+					"┇ Elements " + A + " and " + B + " are now connected!\n" +
+					"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
+		//@formatter:on
 		for(int index = 0; index < subsets.length; index++) {
 			if(subsets[index] == null) {
 				subsets[index] = firstNode;
@@ -126,12 +132,6 @@ public class UnionFind {
 				return;
 			}
 		}
-		//@formatter:off
-			System.out.println("\n"+
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n" +
-						"┇ Elements " + A + " and " + B + " are now connected!\n" +
-						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n");
-		//@formatter:on
 	}// end method
 
 	/*
